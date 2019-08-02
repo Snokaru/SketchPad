@@ -14,7 +14,6 @@ function generateRandomColor()
 function handleHover(div)
 {
     let color = generateRandomColor();
-    console.log("got here");
     div.style.backgroundColor = `rgb(${color.R}, ${color.G}, ${color.B})`;
 }
 
@@ -24,12 +23,23 @@ function makeDivs()
     for(let i = 0; i < 10; i++) {
         for(let j = 0; j < 10; j++) {
             let div = document.createElement('div');
-            div.addEventListener('mouseover ', () => {
+            div.setAttribute('id', 'colorBlock');
+            div.addEventListener('mouseover', () => {
                 handleHover(div);
             });
+
             container.appendChild(div);
         }
     }
 }
+function handleClearButton()
+{
+    let divs = document.querySelectorAll('#colorBlock');
+    for(let div of divs) {
+        div.style.backgroundColor = "white";
+    }
+}
 
 makeDivs();
+let clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', handleClearButton);
